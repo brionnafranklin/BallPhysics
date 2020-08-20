@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
+#include "Sphere.h"
 #include <Gizmos.h>
 #include <glm\ext.hpp>
 
@@ -21,7 +22,12 @@ bool PhysicsSceneApp::startup() {
 	m_2dRenderer = new aie::Renderer2D();
 
 	m_physicsScene = new PhysicsScene();
+	m_physicsScene->setGravity(glm::vec2(0, 0));
 	m_physicsScene->setTimeStep(0.01f);
+
+	Sphere* ball;
+	ball = new Sphere(glm::vec2(-40, 0), glm::vec2(10, 30), 3.0f, 1, glm::vec4(1, 0, 0, 1));
+	m_physicsScene->addActor(ball);
 
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
