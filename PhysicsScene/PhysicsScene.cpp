@@ -15,9 +15,12 @@ void PhysicsScene::addActor(PhysicsObject* actor)
 
 void PhysicsScene::removeActor(PhysicsObject* actor)
 {
-	for (int a = 0; a < m_actors.size; a++)
+	for (auto i = m_actors.begin(); i < m_actors.end(); i++)
 	{
-
+		if (*i == actor)
+		{
+			m_actors.erase(i);
+		}
 	}
 }
 
