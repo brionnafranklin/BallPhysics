@@ -55,11 +55,11 @@ void PhysicsScene::update(float deltatime)
 					std::find(dirty.begin(), dirty.end(), pOther) != dirty.end())
 					continue;
 				RigidBody* pRigid = dynamic_cast<RigidBody*>(pActor);
-				RigidBody* pOther = dynamic_cast<RigidBody*>(pOther);
-				if (!pRigid || !pOther)
+				RigidBody* pRigidOther = dynamic_cast<RigidBody*>(pOther);
+				if (!pRigid || !pRigidOther)
 					continue;
-				if (pRigid->checkCollision(pOther)) {
-					pRigid->applyForceToActor(pOther, pRigid->getVelocity()* pRigid->getMass());
+				if (pRigid->checkCollision(pRigidOther)) {
+					pRigid->applyForceToActor(pRigidOther, pRigid->getVelocity()* pRigid->getMass());
 					dirty.push_back(pRigid);
 					dirty.push_back(pOther);
 				}

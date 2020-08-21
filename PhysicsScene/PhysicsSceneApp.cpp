@@ -26,8 +26,16 @@ bool PhysicsSceneApp::startup() {
 	m_physicsScene->setTimeStep(0.01f);
 
 	Sphere* ball;
-	ball = new Sphere(glm::vec2(-40, 0), glm::vec2(10, 30), 3.0f, 1, glm::vec4(1, 0, 0, 1));
+	ball = new Sphere(glm::vec2(-4, 0), glm::vec2(-20, 0), 3.0f, 1, glm::vec4(1, 0, 0, 1));
+	Sphere* secondBall = new Sphere(glm::vec2(4, 0), glm::vec2(10, 0), 4.0f, 4, glm::vec4(0, 1, 0, 1));
+
 	m_physicsScene->addActor(ball);
+	m_physicsScene->addActor(secondBall);
+
+	ball->applyForce(glm::vec2(30, 0));
+	secondBall->applyForce(glm::vec2(-15, 0));
+
+	//ball->applyForceToActor(secondBall, glm::vec2(2, 0));
 
 	// TODO: remember to change this when redistributing a build!
 	// the following path would be used instead: "./font/consolas.ttf"
