@@ -3,6 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include "Sphere.h"
+#include "Plane.h"
 #include <Gizmos.h>
 
 PhysicsSceneApp::PhysicsSceneApp() {
@@ -42,6 +43,18 @@ bool PhysicsSceneApp::startup() {
 	// create a ball to print on the screen
 	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(1.0f, 0.0f, 0.5f, 1.0f));
 	m_physicsScene->addActor(ball);
+
+	Sphere* ball1 = new Sphere(glm::vec2(-40.0, 0.0f), glm::vec2(60.0f, 0.0f), 8.0f, 8.0f, glm::vec4(1, 0, 0, 1));
+	m_physicsScene->addActor(ball1);
+
+	Sphere* ball2 = new Sphere(glm::vec2(40.0, 0.0f), glm::vec2(-30.0f, 0.0f), 4.0f, 6.0f, glm::vec4(0, 1, 0, 1));
+	m_physicsScene->addActor(ball2);
+
+	Sphere* ball4 = new Sphere(glm::vec2(60.0, 0.0f), glm::vec2(-30.0f, 0.0f), 4.0f, 6.0f, glm::vec4(0, 0, 1, 1));
+	m_physicsScene->addActor(ball4);
+
+	Plane* floor = new Plane(glm::normalize(glm::vec2(1.0f, -6.0f)), 20.0f);
+	m_physicsScene->addActor(floor);
 
 	return true;
 }

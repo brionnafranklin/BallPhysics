@@ -8,7 +8,7 @@ Plane::Plane()
 	m_distanceToOrigin = 0.0f;
 }
 
-Plane::Plane(glm::vec2 normal, float distance)
+Plane::Plane(glm::vec2 normal, float distance) : PhysicsObject(PLANE)
 {
 	m_normal = normal;
 	m_distanceToOrigin = distance;
