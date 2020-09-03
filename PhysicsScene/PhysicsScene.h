@@ -25,9 +25,9 @@ public:
 
 	bool sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2);
 
-	static bool planeToPlane(PhysicsObject*, PhysicsObject*) { return false; }
-	static bool planeToSphere(PhysicsObject*, PhysicsObject*) { return false; }
-	static bool sphereToPlane(PhysicsObject*, PhysicsObject*) { return false; }
+	static bool planeToPlane(PhysicsObject*, PhysicsObject*);
+	static bool planeToSphere(PhysicsObject*, PhysicsObject*);
+	static bool sphereToPlane(PhysicsObject*, PhysicsObject*);
 	static bool sphereToSphere(PhysicsObject*, PhysicsObject*);
 
 protected:

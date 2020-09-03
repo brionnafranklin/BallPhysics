@@ -91,6 +91,49 @@ void PhysicsScene::checkForCollision()
 	}
 }
 
+bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
+{
+	Plane* plane1 = dynamic_cast<Plane*>(object1);
+	Plane* plane2 = dynamic_cast<Plane*>(object2);
+	if (plane1 != nullptr && plane2 != nullptr) {
+		if (plane1->getNormal().x != plane2->getNormal().x || plane1->getNormal().y != plane2->getNormal().y) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
+{
+	Sphere* sphere = dynamic_cast<Sphere*>(object1);
+	Plane* plane = dynamic_cast<Plane*>(object2);
+	if (sphere != nullptr && plane != nullptr) {
+		// calculate distance from sphere surface to plane surface
+		float sphereToPlaneDistance =
+			glm::dot(sphere->getPosition(), plane->getNormal())
+			- plane->getDistance();
+		// flip the normal if behind the plane
+		glm::vec2 collisionNormal = plane->getNormal();
+		if (sphereToPlaneDistance < 0) {
+			collisionNormal *= -1;
+			sphereToPlaneDistance *= -1;
+		}
+
+		sphereToPlaneDistance -= sphere->getRadius();
+		if (sphereToPlaneDistance <= 0) {
+			sphere->applyForce(collisionNormal * sphere->getMass());
+			return true;
+		}
+	}
+	return false;
+}
+
+bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
+{
+	sphereToPlane(object2, object1);
+	return false;
+}
+
 bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
 {
 	Sphere* sphere = dynamic_cast<Sphere*>(obj1);
