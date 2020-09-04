@@ -27,6 +27,7 @@ public:
 	void setElasticity(float value) { m_elasticity = value; }
 	float getMoment() { return m_moment; }
 	void setMoment(float value) { m_moment = value; }
+	float getAngularVelocity() { return m_angularVelocity; }
 
 protected:
 	glm::vec2 m_position;

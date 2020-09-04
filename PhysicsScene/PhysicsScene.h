@@ -29,6 +29,9 @@ public:
 	static bool planeToSphere(PhysicsObject*, PhysicsObject*);
 	static bool sphereToPlane(PhysicsObject*, PhysicsObject*);
 	static bool sphereToSphere(PhysicsObject*, PhysicsObject*);
+	static bool boxToPlane(PhysicsObject*, PhysicsObject*);
+	static bool boxToSphere(PhysicsObject*, PhysicsObject*);
+	static bool boxToBox(PhysicsObject*, PhysicsObject*);
 
 protected:
 	glm::vec2	m_gravity;
