@@ -7,6 +7,12 @@ Box::Box(glm::vec2 position, glm::vec2 velocity, float rotation, float mass, glm
 	m_colour = colour;
 	m_width = m_extents.x * 2;
 	m_height = m_extents.y * 2;
+	m_center.x = position.x - extents.x;
+	m_center.y = position.y - extents.y;
+	m_localX.x = m_center.x;
+	m_localX.y = m_center.x + m_extents.x;
+	m_localY.x = m_center.y;
+	m_localY.y = m_center.y + m_extents.y;
 }
 
 void Box::fixedUpdate(glm::vec2 gravity, float timeStep)
@@ -39,17 +45,17 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts,
 	float& pen, glm::vec2& edgeNormal)
 {
 	float minX, maxX, minY, maxY;
-	float boxW = box.getExtents().x * 2;
-	float boxH = box.getExtents().y * 2;
+	float boxW = box.m_width;
+	float boxH = box.m_height;
 	int numLocalContacts = 0;
 	glm::vec2 localContact(0, 0);
 	bool first = true;
-	for (float x = -box.getExtents().x; x < boxW; x += boxW)
+	for (float x = -box.m_extents.x; x < boxW; x += boxW)
 	{
-		for (float y = -box.getExtents().y; y < boxH; y += boxH)
+		for (float y = -box.m_extents.y; y < boxH; y += boxH)
 		{
 			// position in worldspace
-			glm::vec2 p = box.getCenter() + x * box.m_localX + y * box.m_localY;
+			glm::vec2 p = box.m_center + x * box.m_localX + y * box.m_localY;
 			// position in our box's space
 			glm::vec2 p0(glm::dot(p - m_position, m_localX),
 				glm::dot(p - m_position, m_localY));

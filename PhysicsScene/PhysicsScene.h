@@ -23,8 +23,6 @@ public:
 
 	void checkForCollision();
 
-	bool sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2);
-
 	static bool planeToPlane(PhysicsObject*, PhysicsObject*);
 	static bool planeToSphere(PhysicsObject*, PhysicsObject*);
 	static bool sphereToPlane(PhysicsObject*, PhysicsObject*);
