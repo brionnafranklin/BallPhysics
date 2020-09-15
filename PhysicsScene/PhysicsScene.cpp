@@ -64,10 +64,9 @@ typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctions[] =
 {
-	PhysicsScene::planeToPlane, PhysicsScene::planeToSphere,
-	PhysicsScene::sphereToPlane, PhysicsScene::sphereToSphere,
-	PhysicsScene::boxToPlane, PhysicsScene::boxToSphere,
-	PhysicsScene::boxToBox
+	PhysicsScene::planeToPlane, PhysicsScene::planeToSphere, PhysicsScene::planeToBox,
+	PhysicsScene::sphereToPlane, PhysicsScene::sphereToSphere, PhysicsScene::sphereToBox,
+	PhysicsScene::boxToPlane, PhysicsScene::boxToSphere, PhysicsScene::boxToBox
 };
 
 void PhysicsScene::checkForCollision()
@@ -138,6 +137,12 @@ bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
 	return false;
 }
 
+bool PhysicsScene::planeToBox(PhysicsObject* object1, PhysicsObject* object2)
+{
+	boxToPlane(object2, object1);
+	return false;
+}
+
 bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2)
 {
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
@@ -149,6 +154,12 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 			return true;
 		}
 	}
+	return false;
+}
+
+bool PhysicsScene::sphereToBox(PhysicsObject* object1, PhysicsObject* object2)
+{
+	boxToSphere(object2, object2);
 	return false;
 }
 

@@ -25,8 +25,10 @@ public:
 
 	static bool planeToPlane(PhysicsObject*, PhysicsObject*);
 	static bool planeToSphere(PhysicsObject*, PhysicsObject*);
+	static bool planeToBox(PhysicsObject*, PhysicsObject*);
 	static bool sphereToPlane(PhysicsObject*, PhysicsObject*);
 	static bool sphereToSphere(PhysicsObject*, PhysicsObject*);
+	static bool sphereToBox(PhysicsObject*, PhysicsObject*);
 	static bool boxToPlane(PhysicsObject*, PhysicsObject*);
 	static bool boxToSphere(PhysicsObject*, PhysicsObject*);
 	static bool boxToBox(PhysicsObject*, PhysicsObject*);
