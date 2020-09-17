@@ -44,14 +44,6 @@ void RigidBody::applyForce(glm::vec2 force, glm::vec2 position)
 
 void RigidBody::resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2* collisionNormal)
 {
-	/*glm::vec2 normal = glm::normalize(actor2->getPosition() - m_position);
-	glm::vec2 relativeVelocity = actor2->getVelocity() - m_velocity;
-	float elasticity = (m_elasticity + actor2->getElasticity());
-	float j = glm::dot(-(1 + elasticity) * (relativeVelocity), normal) /
-		glm::dot(normal, normal * ((1 / m_mass) + (1 / actor2->getMass())));
-	glm::vec2 force = normal * j;
-	applyForceToActor(actor2, force);*/
-
 	// find the vector between their centres, or use the provided direction
 // of force, and make sure it's normalised
 	glm::vec2 normal = glm::normalize(collisionNormal ? *collisionNormal :
@@ -86,4 +78,10 @@ void RigidBody::resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2
 		applyForce(-force, contact - m_position);
 		actor2->applyForce(force, contact - actor2->m_position);
 	}
+}
+
+float RigidBody::getKineticEnergy()
+{
+	return 0.5f * (m_mass * glm::dot(m_velocity, m_velocity) +
+		m_moment * m_angularVelocity * m_angularVelocity);
 }

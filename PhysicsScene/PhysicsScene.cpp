@@ -276,6 +276,7 @@ bool PhysicsScene::boxToSphere(PhysicsObject* obj1, PhysicsObject* obj2) {
 			contact = box->getPosition() + (1.0f / numContacts) *
 				(box->getLocalX() * contact.x + box->getLocalY() * contact.y);
 			box->resolveCollision(sphere, contact, direction);
+			return true;
 		}
 		delete direction;
 	}

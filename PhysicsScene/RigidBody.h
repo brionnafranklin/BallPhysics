@@ -15,6 +15,8 @@ public:
 
 		virtual bool checkCollision(PhysicsObject* pOther) = 0;
 
+		float getKineticEnergy();
+
 	glm::vec2 getPosition() { return m_position; }
 	float getRotation() { return m_rotation; }
 	glm::vec2 getVelocity() { return m_velocity; }

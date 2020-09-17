@@ -45,11 +45,14 @@ bool PhysicsSceneApp::startup() {
 	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(0.8f, 0.8f, 0.0f, 1.0f));
 	m_physicsScene->addActor(ball);
 
-	Plane* floor = new Plane(glm::normalize(glm::vec2(1.0f, -6.0f)), 20.0f);
+	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -6.0f)), 20.0f);
 	m_physicsScene->addActor(floor);
 
 	Box* box = new Box(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(6.0f, 10.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
 	m_physicsScene->addActor(box);
+
+	Box* box2 = new Box(glm::vec2(0.0f, 30.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(6.0f, 10.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	m_physicsScene->addActor(box2);
 
 	return true;
 }
