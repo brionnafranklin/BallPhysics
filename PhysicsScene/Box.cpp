@@ -7,12 +7,15 @@ Box::Box(glm::vec2 position, glm::vec2 velocity, float rotation, float mass, glm
 	m_colour = colour;
 	m_width = m_extents.x * 2;
 	m_height = m_extents.y * 2;
+	m_rotation = rotation;
 	m_center.x = position.x - extents.x;
 	m_center.y = position.y - extents.y;
 	m_localX.x = m_center.x;
 	m_localX.y = m_center.x + m_extents.x;
 	m_localY.x = m_center.y;
 	m_localY.y = m_center.y + m_extents.y;
+	m_angularVelocity = 0.0f;
+	m_angularDrag = 0.0f;
 }
 
 void Box::fixedUpdate(glm::vec2 gravity, float timeStep)
@@ -106,4 +109,24 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts,
 		res = true;
 	}
 	return res;
+}
+
+bool Box::checkCollision(PhysicsObject* pOther)
+{
+	Sphere* otherSphere = dynamic_cast<Sphere*>(pOther);
+	Box* otherBox = dynamic_cast<Box*>(pOther);
+	if (otherSphere)
+	{
+		if (glm::distance(m_position, otherSphere->getPosition()) < m_extents.x + otherSphere->getRadius() || glm::distance(m_position, otherSphere->getPosition()) < m_extents.y + otherSphere->getRadius())
+		{
+			return true;
+		}
+	}
+	/*if (otherBox)
+	{
+		if (checkBoxCorners(pOther))
+		{
+			return true;
+		}
+	}*/
 }

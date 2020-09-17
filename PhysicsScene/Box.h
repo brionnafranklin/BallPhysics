@@ -1,6 +1,7 @@
 #pragma once
 #include "RigidBody.h"
 #include "PhysicsObject.h"
+#include "Sphere.h"
 
 class Box : public RigidBody
 {
@@ -12,6 +13,8 @@ public:
 	virtual void makeGizmo();
 
 	bool checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts, float& pen, glm::vec2& edgeNormal);
+
+	virtual bool checkCollision(PhysicsObject* pOther);
 
 	float getWidth() { return m_width; }
 	float getHeight() { return m_height; }

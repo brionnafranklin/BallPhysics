@@ -42,25 +42,14 @@ bool PhysicsSceneApp::startup() {
 	setupContinuousDemo(initialPosition, initialVelocity, gravity.y);
 
 	// create a ball to print on the screen
-	/*Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(1.0f, 0.0f, 0.5f, 1.0f));
-	m_physicsScene->addActor(ball);*/
-
-	//red ball
-	Sphere* ball1 = new Sphere(glm::vec2(-40.0, 0.0f), glm::vec2(60.0f, 0.0f), 8.0f, 8.0f, glm::vec4(1, 0, 0, 1));
-	m_physicsScene->addActor(ball1);
-
-	//green ball
-	Sphere* ball2 = new Sphere(glm::vec2(40.0, 0.0f), glm::vec2(-30.0f, 0.0f), 4.0f, 6.0f, glm::vec4(0, 1, 0, 1));
-	m_physicsScene->addActor(ball2);
-
-	//blue ball
-	/*Sphere* ball4 = new Sphere(glm::vec2(60.0, 0.0f), glm::vec2(-30.0f, 0.0f), 4.0f, 6.0f, glm::vec4(0, 0, 1, 1));
-	m_physicsScene->addActor(ball4);*/
+	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(0.8f, 0.8f, 0.0f, 1.0f));
+	m_physicsScene->addActor(ball);
 
 	Plane* floor = new Plane(glm::normalize(glm::vec2(1.0f, -6.0f)), 20.0f);
 	m_physicsScene->addActor(floor);
 
-	//Box* box 
+	Box* box = new Box(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(6.0f, 10.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	m_physicsScene->addActor(box);
 
 	return true;
 }
