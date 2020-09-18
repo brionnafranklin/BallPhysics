@@ -7,7 +7,10 @@ Box::Box(glm::vec2 position, glm::vec2 velocity, float rotation, float mass, glm
 	m_colour = colour;
 	m_width = m_extents.x * 2;
 	m_height = m_extents.y * 2;
+	m_position = position;
+	m_velocity = velocity;
 	m_rotation = rotation;
+	m_moment = 0.5f * mass * extents.x * extents.y;
 	m_center.x = position.x - extents.x;
 	m_center.y = position.y - extents.y;
 	m_localX.x = m_center.x;

@@ -48,11 +48,11 @@ bool PhysicsSceneApp::startup() {
 	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -6.0f)), 20.0f);
 	m_physicsScene->addActor(floor);
 
-	Box* box = new Box(glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(6.0f, 10.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	m_physicsScene->addActor(box);
+	Box* boxBottomLeft = new Box(glm::vec2(-80.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	m_physicsScene->addActor(boxBottomLeft);
 
-	Box* box2 = new Box(glm::vec2(0.0f, 30.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(6.0f, 10.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-	m_physicsScene->addActor(box2);
+	Box* boxBottomRight = new Box(glm::vec2(-55.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	m_physicsScene->addActor(boxBottomRight);
 
 	return true;
 }
