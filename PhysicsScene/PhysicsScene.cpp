@@ -159,7 +159,7 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 
 bool PhysicsScene::sphereToBox(PhysicsObject* object1, PhysicsObject* object2)
 {
-	boxToSphere(object2, object2);
+	boxToSphere(object2, object1);
 	return false;
 }
 
@@ -229,12 +229,12 @@ bool PhysicsScene::boxToSphere(PhysicsObject* obj1, PhysicsObject* obj2) {
 	Sphere* sphere = dynamic_cast<Sphere*>(obj2);
 	if (box != nullptr && sphere != nullptr) {
 		glm::vec2 circlePos = sphere->getPosition() - box->getPosition();
-		float w2 = box->getWidth() / 2, h2 = box->getHeight() / 2;
+		float halfWidth = box->getWidth() / 2, halfHeight = box->getHeight() / 2;
 		int numContacts = 0;
 		glm::vec2 contact(0, 0); // contact is in our box coordinates
 		// check the four corners to see if any of them are inside the circle
-		for (float x = -w2; x <= w2; x += box->getWidth()) {
-			for (float y = -h2; y <= h2; y += box->getHeight()) {
+		for (float x = -halfWidth; x <= halfWidth; x += box->getWidth()) {
+			for (float y = -halfHeight; y <= halfHeight; y += box->getHeight()) {
 				glm::vec2 p = x * box->getLocalX() + y * box->getLocalY();
 				glm::vec2 dp = p - circlePos;
 				if (dp.x * dp.x + dp.y * dp.y < sphere->getRadius() * sphere->getRadius()) {
@@ -243,31 +243,32 @@ bool PhysicsScene::boxToSphere(PhysicsObject* obj1, PhysicsObject* obj2) {
 				}
 			}
 		}
+
 		glm::vec2* direction = nullptr;
 		// get the local position of the circle centre
 		glm::vec2 localPos(glm::dot(box->getLocalX(), circlePos),
 			glm::dot(box->getLocalY(), circlePos));
-		if (localPos.y < h2 && localPos.y > -h2) {
-			if (localPos.x > 0 && localPos.x < w2 + sphere->getRadius()) {
+		if (localPos.y < halfHeight && localPos.y > -halfHeight) {
+			if (localPos.x > 0 && localPos.x < halfWidth + sphere->getRadius()) {
 				numContacts++;
-				contact += glm::vec2(w2, localPos.y);
+				contact += glm::vec2(halfWidth, localPos.y);
 				direction = new glm::vec2(box->getLocalX());
 			}
-			if (localPos.x < 0 && localPos.x > -(w2 + sphere->getRadius())) {
+			if (localPos.x < 0 && localPos.x > -(halfWidth + sphere->getRadius())) {
 				numContacts++;
-				contact += glm::vec2(-w2, localPos.y);
+				contact += glm::vec2(-halfWidth, localPos.y);
 				direction = new glm::vec2(-box->getLocalX());
 			}
 		}
-		if (localPos.x < w2 && localPos.x > -w2) {
-			if (localPos.y > 0 && localPos.y < h2 + sphere->getRadius()) {
+		if (localPos.x < halfWidth && localPos.x > -halfWidth) {
+			if (localPos.y > 0 && localPos.y < halfHeight + sphere->getRadius()) {
 				numContacts++;
-				contact += glm::vec2(localPos.x, h2);
+				contact += glm::vec2(localPos.x, halfHeight);
 				direction = new glm::vec2(box->getLocalY());
 			}
-			if (localPos.y < 0 && localPos.y > -(h2 + sphere->getRadius())) {
+			if (localPos.y < 0 && localPos.y > -(halfHeight + sphere->getRadius())) {
 				numContacts++;
-				contact += glm::vec2(localPos.x, -h2);
+				contact += glm::vec2(localPos.x, -halfHeight);
 				direction = new glm::vec2(-box->getLocalY());
 			}
 		}
@@ -276,7 +277,6 @@ bool PhysicsScene::boxToSphere(PhysicsObject* obj1, PhysicsObject* obj2) {
 			contact = box->getPosition() + (1.0f / numContacts) *
 				(box->getLocalX() * contact.x + box->getLocalY() * contact.y);
 			box->resolveCollision(sphere, contact, direction);
-			return true;
 		}
 		delete direction;
 	}
