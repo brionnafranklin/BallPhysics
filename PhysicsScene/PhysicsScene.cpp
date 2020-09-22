@@ -140,7 +140,9 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(object2);
 	if (sphere1 != nullptr && sphere2 != nullptr) {
-		if (glm::distance(sphere1->getPosition(), sphere2->getPosition()) < sphere1->getRadius() + sphere2->getRadius()) {
+		float distance = glm::distance(sphere1->getPosition(), sphere2->getPosition());
+		if (distance <= sphere1->getRadius() + sphere2->getRadius()) 
+		{
 			glm::vec2 contact = 0.5f * (sphere1->getPosition() + sphere2->getPosition()) * 0.5f;
 			sphere1->resolveCollision(sphere2, contact);
 			return true;

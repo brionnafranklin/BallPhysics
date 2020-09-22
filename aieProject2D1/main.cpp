@@ -1,5 +1,6 @@
 #include "aieProject2D1App.h"
 
+/// Runs on startup
 int main() {
 	
 	// allocation

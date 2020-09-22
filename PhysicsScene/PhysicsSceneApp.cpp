@@ -34,18 +34,48 @@ bool PhysicsSceneApp::startup() {
 
 	// initialize position and velocity
 	glm::vec2 initialPosition = glm::vec2(10.0f, 20.0f);
-	glm::vec2 finalPosition = glm::vec2(30.0f, 20.0f);
+	glm::vec2 finalPosition = glm::vec2(100.0f, 10.0f);
 	glm::vec2 initialVelocity = calculateVelocity(initialPosition, finalPosition, gravity.y, 5.0f);
 
 	// simulate using kinematic formulae
 	setupContinuousDemo(initialPosition, initialVelocity, gravity.y);
 
-	// create a ball to print on the screen
-	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(0.8f, 0.8f, 0.0f, 1.0f));
-	m_physicsScene->addActor(ball);
+	// create a balls to print on the screen
+	Sphere* movingBall = new Sphere(initialPosition, initialVelocity, 1.0f, 4.0f, glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
+	m_physicsScene->addActor(movingBall);
 
-	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -6.0f)), 20.0f);
+	//Redish
+	Sphere* topBall = new Sphere(glm::vec2(60.0f, 30.0f), glm::vec2(0.0f, 0.0f), 1.0f, 4.0f, glm::vec4(1.0f, 0.3f, 0.0f, 1.0f));
+	m_physicsScene->addActor(topBall);
+
+	//Orange
+	Sphere* secondBall = new Sphere(glm::vec2(60.0f, 20.0f), glm::vec2(0.0f, 0.0f), 1.0f, 4.0f, glm::vec4(1.0f, 0.5f, 0.0f, 1.0f));
+	m_physicsScene->addActor(secondBall);
+
+	//White
+	Sphere* thirdBall = new Sphere(glm::vec2(60.0f, 10.0f), glm::vec2(0.0f, 0.0f), 1.0f, 4.0f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+	m_physicsScene->addActor(thirdBall);
+
+	//Pink
+	Sphere* forthBall = new Sphere(glm::vec2(60.0f, 0.0f), glm::vec2(0.0f, 0.0f), 1.0f, 4.0f, glm::vec4(1.0f, 0.0f, 0.5f, 1.0f));
+	m_physicsScene->addActor(forthBall);
+
+	//Purplish
+	Sphere* fifthBall = new Sphere(glm::vec2(60.0f, -10.0f), glm::vec2(0.0f, 0.0f), 1.0f, 4.0f, glm::vec4(0.7f, 0.0f, 0.5f, 1.0f));
+	m_physicsScene->addActor(fifthBall);
+
+	//box
+	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -20.0f)), 40.0f);
 	m_physicsScene->addActor(floor);
+
+	Plane* rightWall = new Plane(glm::normalize(glm::vec2(80.0f, 0.0f)), 80.0f);
+	m_physicsScene->addActor(rightWall);
+
+	Plane* leftWall = new Plane(glm::normalize(glm::vec2(-80.0f, 0.0f)), 80.0f);
+	m_physicsScene->addActor(leftWall);
+
+	Plane* roof = new Plane(glm::normalize(glm::vec2(0.0f, 20.0f)), 40.0f);
+	m_physicsScene->addActor(roof);
 
 	return true;
 }
