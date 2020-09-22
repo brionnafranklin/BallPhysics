@@ -5,7 +5,6 @@
 #include "Sphere.h"
 #include "Plane.h"
 #include <Gizmos.h>
-#include "Box.h"
 
 PhysicsSceneApp::PhysicsSceneApp() {
 
@@ -47,22 +46,6 @@ bool PhysicsSceneApp::startup() {
 
 	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -6.0f)), 20.0f);
 	m_physicsScene->addActor(floor);
-
-	//blue
-	Box* boxBottomLeft = new Box(glm::vec2(59.0f, -10.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	//m_physicsScene->addActor(boxBottomLeft);
-
-	//green
-	Box* boxBottomRight = new Box(glm::vec2(80.0f, -10.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-	//m_physicsScene->addActor(boxBottomRight);
-
-	//yellow
-	Box* boxMiddle = new Box(glm::vec2(70.0f, 5.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
-	m_physicsScene->addActor(boxMiddle);
-
-	//orange
-	Box* boxTopRight = new Box(glm::vec2(80.0f, 25.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(1.0f, 0.5f, 0.0f, 1.0f));
-	m_physicsScene->addActor(boxTopRight);
 
 	return true;
 }
