@@ -1,4 +1,5 @@
 #include "RigidBody.h"
+#include <iostream>
 
 RigidBody::RigidBody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass)
 {
@@ -26,6 +27,12 @@ void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep)
 		m_angularVelocity = 0;
 	}
 	m_velocity -= m_velocity * m_linearDrag * timeStep;
+	float magnitude = glm::length(m_velocity);
+	if (magnitude > m_maxSpeed)
+	{
+		m_velocity = glm::normalize(m_velocity);
+		 m_velocity *= m_maxSpeed;
+	}
 	//Calculate the change in position
 	m_position += m_velocity * timeStep;
 	m_angularVelocity -= m_angularVelocity * m_angularDrag * timeStep;
@@ -34,6 +41,8 @@ void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep)
 
 void RigidBody::debug()
 {
+	std::cout << m_position.x << m_position.y << std::endl;
+	std::cout <<"Collision"<< std::endl;
 }
 
 void RigidBody::applyForce(glm::vec2 force, glm::vec2 position)
@@ -44,6 +53,7 @@ void RigidBody::applyForce(glm::vec2 force, glm::vec2 position)
 
 void RigidBody::resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2* collisionNormal)
 {
+	debug();
 	// find the vector between their centres, or use the provided direction
 // of force, and make sure it's normalised
 	glm::vec2 normal = glm::normalize(collisionNormal ? *collisionNormal :

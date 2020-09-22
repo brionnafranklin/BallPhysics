@@ -13,8 +13,6 @@ public:
 
 	void resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2* collisionNormal = nullptr);
 
-		virtual bool checkCollision(PhysicsObject* pOther) = 0;
-
 		float getKineticEnergy();
 
 	glm::vec2 getPosition() { return m_position; }
@@ -34,6 +32,7 @@ public:
 protected:
 	glm::vec2 m_position;
 	glm::vec2 m_velocity;
+	float m_maxSpeed = 1000.0f;
 	float m_angularVelocity;
 	float m_moment;
 	float m_mass;

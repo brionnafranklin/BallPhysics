@@ -34,8 +34,8 @@ bool PhysicsSceneApp::startup() {
 	m_physicsScene->setTimeStep(0.01f);
 
 	// initialize position and velocity
-	glm::vec2 initialPosition = glm::vec2(-60.0f, 0.0f);
-	glm::vec2 finalPosition = glm::vec2(60.0f, 0.0f);
+	glm::vec2 initialPosition = glm::vec2(10.0f, 20.0f);
+	glm::vec2 finalPosition = glm::vec2(30.0f, 20.0f);
 	glm::vec2 initialVelocity = calculateVelocity(initialPosition, finalPosition, gravity.y, 5.0f);
 
 	// simulate using kinematic formulae
@@ -48,11 +48,21 @@ bool PhysicsSceneApp::startup() {
 	Plane* floor = new Plane(glm::normalize(glm::vec2(0.0f, -6.0f)), 20.0f);
 	m_physicsScene->addActor(floor);
 
-	Box* boxBottomLeft = new Box(glm::vec2(-80.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-	m_physicsScene->addActor(boxBottomLeft);
+	//blue
+	Box* boxBottomLeft = new Box(glm::vec2(59.0f, -10.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
+	//m_physicsScene->addActor(boxBottomLeft);
 
-	Box* boxBottomRight = new Box(glm::vec2(-55.0f, 0.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-	m_physicsScene->addActor(boxBottomRight);
+	//green
+	Box* boxBottomRight = new Box(glm::vec2(80.0f, -10.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
+	//m_physicsScene->addActor(boxBottomRight);
+
+	//yellow
+	Box* boxMiddle = new Box(glm::vec2(70.0f, 5.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+	m_physicsScene->addActor(boxMiddle);
+
+	//orange
+	Box* boxTopRight = new Box(glm::vec2(80.0f, 25.0f), glm::vec2(0.0f, 0.0f), 0.0f, 4.0f, glm::vec2(10.0f, 6.0f), glm::vec4(1.0f, 0.5f, 0.0f, 1.0f));
+	m_physicsScene->addActor(boxTopRight);
 
 	return true;
 }

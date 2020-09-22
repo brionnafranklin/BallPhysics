@@ -1,5 +1,6 @@
 #include "Box.h"
 #include <Gizmos.h>
+#include <iostream>
 
 Box::Box(glm::vec2 position, glm::vec2 velocity, float rotation, float mass, glm::vec2 extents, glm::vec4 colour) : RigidBody(BOX, position, velocity, rotation, mass)
 {
@@ -29,6 +30,7 @@ void Box::fixedUpdate(glm::vec2 gravity, float timeStep)
 	float sn = sinf(m_rotation);
 	m_localX = glm::normalize(glm::vec2(cs, sn));
 	m_localY = glm::normalize(glm::vec2(-sn, cs));
+	//debug();
 }
 
 void Box::makeGizmo()
@@ -111,22 +113,7 @@ bool Box::checkBoxCorners(const Box& box, glm::vec2& contact, int& numContacts,
 	return res;
 }
 
-bool Box::checkCollision(PhysicsObject* pOther)
+void Box::debug()
 {
-	Sphere* otherSphere = dynamic_cast<Sphere*>(pOther);
-	Box* otherBox = dynamic_cast<Box*>(pOther);
-	if (otherSphere)
-	{
-		if (glm::distance(m_position, otherSphere->getPosition()) < m_extents.x + otherSphere->getRadius() || glm::distance(m_position, otherSphere->getPosition()) < m_extents.y + otherSphere->getRadius())
-		{
-			return true;
-		}
-	}
-	/*if (otherBox)
-	{
-		if (checkBoxCorners(pOther))
-		{
-			return true;
-		}
-	}*/
+	std::cout << m_position.x << m_position.y << std::endl;
 }
