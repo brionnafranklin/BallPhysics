@@ -6,14 +6,17 @@
 #include "Plane.h"
 #include <Gizmos.h>
 
+/// default contructer
 PhysicsSceneApp::PhysicsSceneApp() {
 
 }
 
+/// default decontructer
 PhysicsSceneApp::~PhysicsSceneApp() {
 
 }
 
+/// where the objects are created and placed
 bool PhysicsSceneApp::startup() {
 	// increase the 2D line count to maximize the number of objects we can draw
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
@@ -80,12 +83,14 @@ bool PhysicsSceneApp::startup() {
 	return true;
 }
 
+/// deletes font and renderer
 void PhysicsSceneApp::shutdown() {
 
 	delete m_font;
 	delete m_2dRenderer;
 }
 
+/// clears buffer, updates the PhysicsScene, and closes the program when excape it hit
 void PhysicsSceneApp::update(float deltaTime) {
 
 	// input example
@@ -106,6 +111,7 @@ void PhysicsSceneApp::update(float deltaTime) {
 		quit();
 }
 
+/// draws the gizmos and text
 void PhysicsSceneApp::draw() {
 
 	// wipe the screen to the background colour
@@ -128,6 +134,7 @@ void PhysicsSceneApp::draw() {
 	m_2dRenderer->end();
 }
 
+/// calculates where the sphere will be in the next frame
 void PhysicsSceneApp::setupContinuousDemo(glm::vec2 initialPosition, glm::vec2 initialVelocity, float gravity)
 {
 	float time = 0.0f;
@@ -147,6 +154,7 @@ void PhysicsSceneApp::setupContinuousDemo(glm::vec2 initialPosition, glm::vec2 i
 	}
 }
 
+/// calculates the velocity using intial and final positions, gravity, and time
 glm::vec2 PhysicsSceneApp::calculateVelocity(glm::vec2 initialPosition, glm::vec2 finalPosition, float gravity, float time)
 {
 	glm::vec2 initialVelocity = glm::vec2(0, 0);

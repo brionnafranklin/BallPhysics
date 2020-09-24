@@ -1,6 +1,7 @@
 #include "Plane.h"
 #include <Gizmos.h>
 
+/// default constructer
 Plane::Plane()
 	: PhysicsObject(PLANE)
 {
@@ -8,20 +9,24 @@ Plane::Plane()
 	m_distanceToOrigin = 0.0f;
 }
 
+/// constructer that sets up the normal and distance of the plane
 Plane::Plane(glm::vec2 normal, float distance) : PhysicsObject(PLANE)
 {
 	m_normal = normal;
 	m_distanceToOrigin = distance;
 }
 
+/// default deconstructer
 Plane::~Plane()
 {
 }
 
+/// overrides the base function
 void Plane::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
 }
 
+/// draws the plane
 void Plane::makeGizmo()
 {
 	float lineSegmentLength = 300;
@@ -34,10 +39,12 @@ void Plane::makeGizmo()
 	aie::Gizmos::add2DLine(start, end, colour);
 }
 
+/// overrides the base function
 void Plane::resetPosition()
 {
 }
 
+/// tells the physics objects what to do when they collide
 void Plane::resolveCollision(RigidBody* actor2, glm::vec2 contact)
 {
 	glm::vec2 collisionNormal = m_normal;

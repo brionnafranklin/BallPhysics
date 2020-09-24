@@ -1,6 +1,7 @@
 #include "RigidBody.h"
 #include <iostream>
 
+/// Constructer; sets the shape id, position, velocity, rotation, mass
 RigidBody::RigidBody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float rotation, float mass)
 {
 	m_shapeID = shapeID;
@@ -10,10 +11,12 @@ RigidBody::RigidBody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, 
 	m_mass = mass;
 }
 
+/// default deconstructer
 RigidBody::~RigidBody()
 {
 }
 
+/// applies gravity and calculates the change in position
 void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
 	//Apply gravity
@@ -39,18 +42,21 @@ void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep)
 	m_rotation += m_angularVelocity * timeStep;
 }
 
+/// prints the object's position, and the word "collision" when it collides with something
 void RigidBody::debug()
 {
 	std::cout << m_position.x << m_position.y << std::endl;
 	std::cout <<"Collision"<< std::endl;
 }
 
+/// callculates the change in velocity once a force is applied
 void RigidBody::applyForce(glm::vec2 force, glm::vec2 position)
 {
 	//Calculate the change in velocity
 	m_velocity += force / m_mass;
 }
 
+/// tells the rigid body how to react when a collision happens
 void RigidBody::resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2* collisionNormal)
 {
 	debug();
@@ -90,6 +96,7 @@ void RigidBody::resolveCollision(RigidBody* actor2, glm::vec2 contact, glm::vec2
 	}
 }
 
+/// calculates the kinetic energy
 float RigidBody::getKineticEnergy()
 {
 	return 0.5f * (m_mass * glm::dot(m_velocity, m_velocity) +

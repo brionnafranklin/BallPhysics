@@ -4,6 +4,7 @@
 #include <list>
 #include "Plane.h"
 
+/// clears the acters
 PhysicsScene::~PhysicsScene()
 {
 	for (auto actor : m_actors) {
@@ -11,11 +12,13 @@ PhysicsScene::~PhysicsScene()
 	}
 }
 
+/// adds actor to the list of actors
 void PhysicsScene::addActor(PhysicsObject* actor)
 {
 	m_actors.push_back(actor);
 }
 
+/// deletes actor from the list of actors
 void PhysicsScene::removeActor(PhysicsObject* actor)
 {
 	for (auto i = m_actors.begin(); i < m_actors.end(); i++) {
@@ -25,6 +28,7 @@ void PhysicsScene::removeActor(PhysicsObject* actor)
 	}
 }
 
+/// updates the the physics for every object in the game
 void PhysicsScene::update(float deltaTime)
 {
 	// store how much time has accumulated since last update
@@ -45,6 +49,7 @@ void PhysicsScene::update(float deltaTime)
 	}
 }
 
+/// makes a gizmo for every object in the game
 void PhysicsScene::updateGizmos()
 {
 	for (auto pActor : m_actors) {
@@ -52,6 +57,7 @@ void PhysicsScene::updateGizmos()
 	}
 }
 
+/// calls debug for every object in the game
 void PhysicsScene::debugScene()
 {
 	for (auto actor : m_actors) {
@@ -67,6 +73,7 @@ static fn collisionFunctions[] =
 	PhysicsScene::sphereToPlane, PhysicsScene::sphereToSphere
 };
 
+/// checks for collisions against all objects
 void PhysicsScene::checkForCollision()
 {
 	// get the number of actors in the scene
@@ -91,6 +98,7 @@ void PhysicsScene::checkForCollision()
 	}
 }
 
+/// checks for collision between a plane and another plane
 bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
 {
 	Plane* plane1 = dynamic_cast<Plane*>(object1);
@@ -103,6 +111,7 @@ bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
 	return false;
 }
 
+/// checks for collision between a sphere and a plane
 bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 {
 	Sphere* sphere = dynamic_cast<Sphere*>(object1);
@@ -129,12 +138,14 @@ bool PhysicsScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 	return false;
 }
 
+/// checks for collision between a plane and a sphere
 bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
 {
 	sphereToPlane(object2, object1);
 	return false;
 }
 
+/// checks for collision between a sphere and another sphere
 bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2)
 {
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
@@ -143,7 +154,7 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 		float distance = glm::distance(sphere1->getPosition(), sphere2->getPosition());
 		if (distance <= sphere1->getRadius() + sphere2->getRadius()) 
 		{
-			glm::vec2 contact = 0.5f * (sphere1->getPosition() + sphere2->getPosition()) * 0.5f;
+			glm::vec2 contact = 0.5f * (sphere1->getPosition() + sphere2->getPosition());
 			sphere1->resolveCollision(sphere2, contact);
 			return true;
 		}

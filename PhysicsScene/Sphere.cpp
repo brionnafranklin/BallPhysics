@@ -1,6 +1,7 @@
 #include "Sphere.h"
 #include <Gizmos.h>
 
+/// sets intial position, velocity, mass, radius, and color
 Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 colour) : RigidBody(SPHERE, position, velocity, 0.0f, mass)
 {
 	m_radius = radius;
@@ -8,6 +9,7 @@ Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius,
 	m_moment = 0.5f * mass * radius * radius;
 }
 
+/// draws a circle and a line(to show rotation)
 void Sphere::makeGizmo()
 {
 	glm::vec2 end = glm::vec2(std::cos(m_rotation), std::sin(m_rotation)) *
@@ -16,6 +18,7 @@ void Sphere::makeGizmo()
 	aie::Gizmos::add2DLine(m_position, m_position + end, glm::vec4(255 - m_colour.x, 255 - m_colour.y, 255 - m_colour.z, 1));
 }
 
+/// checks for collision between two spheres
 bool Sphere::checkCollision(PhysicsObject* pOther)
 {
 	Sphere* otherSphere = dynamic_cast<Sphere*>(pOther);

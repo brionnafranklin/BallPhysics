@@ -1,5 +1,6 @@
 #include "PhysicsSceneApp.h"
 
+/// runs when program starts
 int main() {
 	
 	// allocation
