@@ -18,6 +18,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "aieProject2D1", "aieProject2D1\aieProject2D1.vcxproj", "{DEA49362-B428-4215-8D64-4EA0B4FF0858}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsScene", "PhysicsScene\PhysicsScene.vcxproj", "{06902E64-2A4C-4AB6-93F4-3C2481A6BA44}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AF59BB0B-E059-4773-83DC-728A949647DA} = {AF59BB0B-E059-4773-83DC-728A949647DA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
